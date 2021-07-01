@@ -3,11 +3,9 @@ const jwt = require("jsonwebtoken");
 const mySecret = process.env['jwt-secret']
 
 
-// do it later
-
+// do i
 const authMiddle = async (req,res,next) => {
   try{
-
     let token = req.headers.authorization;
     if(!token) {
       res.status(400).json({success:false,errorMsg:"token is not there !"})

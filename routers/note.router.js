@@ -5,9 +5,7 @@ const { extend } = require("lodash");
 
 router.route("/")
 .get(async(req,res)=> {
-
   try{
-  
   let notes = await Note.find({})
   notes = notes.filter((note) => note.active);
   res.status(200).json({success:true,notes})
@@ -17,9 +15,7 @@ router.route("/")
     }
 })
 .post(async(req,res)=> {
-
   try{
-
     const {user} = req;
     const {title,note,tag,color} =req.body;
     let newNote = new Note({title:title,note:note,tag:tag,color:color})
@@ -33,8 +29,7 @@ router.route("/")
     }
 })
 .put(async(req,res)=> {
-  try{
-  
+  try{ 
   const {noteId} = req.body;
   console.log("39",noteId)
   let note = await Note.findOne({_id:noteId})
@@ -54,7 +49,6 @@ router.route("/")
 router.route("/editnote/:noteId")
 .post(async(req,res)=> {
   try{
-
     const {noteId} = req.params;
     const updateData = req.body;
     console.log(noteId)

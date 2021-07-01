@@ -11,25 +11,19 @@ const mySecret = process.env['jwt-secret']
 router.route("/login")
 .post(async(req,res)=> {
   try{   
-
     const {username,password} = req.body;
     let user = await User.findOne({username:username})
 
     if(user) {
       if(bcrypt.compareSync(password,user.password)){
-             const token = jwt.sign({_id:user._id,username:user.username,email:user.email},mySecret,{expiresIn:'24h'})
-          
+             const token = jwt.sign({_id:user._id,username:user.username,email:user.email},mySecret,{expiresIn:'24h'})        
           res.status(200).json({success:true,token})
-
       } else{
          res.json({success:false,message:"Password is Incorrect!"})
       }
     } else{
       res.json({success:false,message:"username is Incorrect!"})
     }
-  
-   
-
   }catch(error){
        console.log(error)
         res.status(400).json({success:false, message: "Request failed please check errorMessage key for more details", errorMessage: error.message })
